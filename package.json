@@ -1,0 +1,43 @@
+{
+  "name": "react-chat-parcel",
+  "version": "1.0.1",
+  "description": "This is a demo react chat using Parcel",
+  "main": "src/index.html",
+  "scripts": {
+    "build": "parcel build ./src/index.html",
+    "start": "parcel serve ./src/index.html",
+    "format": "prettier --config .prettierrc --write \"src/**/*.jsx\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xergiodf/react-chat.git"
+  },
+  "keywords": [
+    "React",
+    "Chat",
+    "Parcel"
+  ],
+  "author": "Sergio Fernandez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xergiodf/react-chat/issues"
+  },
+  "homepage": "https://github.com/xergiodf/react-chat#readme",
+  "browserslist": [
+    "last 1 Chrome version"
+  ],
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "styled-components": "^5.2.0",
+    "uuid": "^8.3.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/plugin-transform-runtime": "^7.11.5",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-react": "^7.10.4",
+    "parcel-bundler": "^1.12.4",
+    "prettier": "^2.1.2"
+  }
+}
