@@ -1,6 +1,16 @@
 import React, { useContext } from 'react'
+import styled from 'styled-components'
 import { GlobalContext } from '../GlobalState'
 import { ADD_CONTACT, SELECT_CONTACT } from '../GlobalState/actions'
+import Contacts from './Contacts'
+import Contact from './Contact'
+
+const Content = styled.div`
+  height: 75%;
+  overflow-y: auto;
+  border-top: solid 1px #f1f1f1;
+  border-bottom: solid 1px #f1f1f1;
+`
 
 const ContactsBox = () => {
   const {
@@ -17,24 +27,35 @@ const ContactsBox = () => {
   }
 
   return (
-    <ul>
-      <li>
-        <button onClick={() => onSelectContact(me)}>
-          {selected === me && '🔘️'} You
-        </button>
-      </li>
-      {contacts.map((c) => (
-        <li key={c.id}>
-          <button onClick={() => onSelectContact(c.id)}>
-            {selected === c.id && '🔘️'}
-            {c.name}
-          </button>
-        </li>
-      ))}
-      <li>
-        <button onClick={() => onAddContact()}>Add Contact</button>
-      </li>
-    </ul>
+    <Contacts>
+      <h2>
+        <span className="icon">👥️</span>Contacts
+      </h2>
+      <Content>
+        <Contact
+          name="You"
+          onClick={() => onSelectContact(me)}
+          icon={(selected === me && '💬️') || '🔵️'}
+          clickable
+        />
+        {contacts.map((c) => (
+          <Contact
+            key={`contact-${c.id}`}
+            onClick={() => onSelectContact(c.id)}
+            name={c.name}
+            icon={(selected === c.id && '💬️') || '🔵️'}
+            clickable
+          />
+        ))}
+      </Content>
+
+      <Contact
+        onClick={() => onAddContact()}
+        name="Add contact"
+        icon="🗣️"
+        clickable
+      />
+    </Contacts>
   )
 }
 
