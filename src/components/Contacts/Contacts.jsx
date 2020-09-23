@@ -28,8 +28,4 @@ export default styled.div`
   & h2 .icon {
     margin-right: 1.5rem;
   }
-
-  & ${Contact}:last-child {
-    margin: 0;
-  }
 `

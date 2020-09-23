@@ -5,6 +5,7 @@
 .test
 coverage
 dist
+public
 node_modules
 
 lint.json
