@@ -1,14 +1,20 @@
 import React from 'react'
 import GlobalState from '../GlobalState'
 import Contacts from '../Contacts'
-import MessagesView from '../MessagesView'
-import MessagesInput from '../MessagesInput'
+import Messages from '../Messages'
+import MessagesView from '../Messages/View'
+import MessagesInput from '../Messages/Input'
+import Container from './Container'
 
 const App = () => (
   <GlobalState>
-    <Contacts />
-    <MessagesView />
-    <MessagesInput />
+    <Container>
+      <Contacts />
+      <Messages>
+        <MessagesView />
+        <MessagesInput />
+      </Messages>
+    </Container>
   </GlobalState>
 )
 
