@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom'
 import App from './components/App'
 import Reset from './components/UI/Reset'
 
-const rootElement = document.getElementById('app')
+const rootElement = document.getElementsByTagName('div')
 ReactDOM.render(
-  <React.StrictMode>
+  <>
     <Reset />
     <App />
-  </React.StrictMode>,
-  rootElement
+  </>,
+  // This is a workaround to work in CodeSandbox
+  rootElement[0]
 )

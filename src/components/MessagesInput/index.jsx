@@ -6,20 +6,22 @@ const TextBox = () => {
   const { dispatch } = useContext(GlobalContext)
   const [text, setText] = useState('')
 
-  const onMsgSend = () => {
-    dispatch({ type: SEND_MESSAGE, payload: text })
-    setText('')
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      dispatch({ type: SEND_MESSAGE, payload: text })
+      setText('')
+    }
   }
 
   return (
     <>
-      <textarea
-        rows="4"
-        cols="50"
+      <input
         onChange={(e) => setText(e.target.value)}
+        onKeyDown={handleKeyDown}
         value={text}
+        placeholder="Type your message here!"
+        type="text"
       />
-      <button onClick={onMsgSend}>Send</button>
     </>
   )
 }
