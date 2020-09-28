@@ -1,7 +1,7 @@
 {
-  "name": "react-chat-parcel",
+  "name": "react-chat",
   "version": "1.0.1",
-  "description": "This is a demo react chat using Parcel",
+  "description": "",
   "main": "src/index.html",
   "scripts": {
     "build": "parcel build ./src/index.html --out-dir public",
@@ -12,11 +12,7 @@
     "type": "git",
     "url": "git+https://github.com/xergiodf/react-chat.git"
   },
-  "keywords": [
-    "React",
-    "Chat",
-    "Parcel"
-  ],
+  "keywords": [],
   "author": "Sergio Fernandez",
   "license": "MIT",
   "bugs": {

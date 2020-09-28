@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
 import { GlobalContext } from '../GlobalState'
-import { SEND_MESSAGE } from '../GlobalState/actions'
+import { SEND_MESSAGE, SAVE_DRAFT } from '../GlobalState/actions'
 
 const InputWrapper = styled.div`
   box-sizing: border-box;
@@ -34,22 +34,30 @@ const InputWrapper = styled.div`
 `
 
 const Input = () => {
-  const { dispatch } = useContext(GlobalContext)
-  const [text, setText] = useState('')
+  const {
+    dispatch,
+    state: { drafts = [], selected, me },
+  } = useContext(GlobalContext)
+
+  const draft = drafts.find((d) => d.from === me && d.to === selected) || {
+    message: '',
+  }
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
-      dispatch({ type: SEND_MESSAGE, payload: text })
-      setText('')
+      dispatch({ type: SEND_MESSAGE, payload: draft.message })
+      dispatch({ type: SAVE_DRAFT, payload: '' })
     }
   }
 
   return (
     <InputWrapper>
       <input
-        onChange={(e) => setText(e.target.value)}
+        onChange={(e) =>
+          dispatch({ type: SAVE_DRAFT, payload: e.target.value })
+        }
         onKeyDown={handleKeyDown}
-        value={text}
+        value={draft.message}
         placeholder="Type your message here!"
         type="text"
       />

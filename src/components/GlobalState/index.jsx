@@ -1,6 +1,11 @@
 import React, { createContext, useReducer } from 'react'
 import { v4 as uuidv4 } from 'uuid'
-import { ADD_CONTACT, SEND_MESSAGE, SELECT_CONTACT } from './actions'
+import {
+  ADD_CONTACT,
+  SEND_MESSAGE,
+  SELECT_CONTACT,
+  SAVE_DRAFT,
+} from './actions'
 
 export const GlobalContext = createContext({})
 
@@ -17,6 +22,15 @@ Contacts structure
 {
   id: '',
   name: ''
+}
+
+Drafts structure 
+{
+  id: '',
+  from: '',
+  to: '',
+  message: '',
+  timestamp: ''
 }
 */
 
@@ -38,10 +52,32 @@ const initialState = {
   messages: [],
   contacts: [],
   selected: undefined,
+  drafts: [],
 }
 
 const reducerFn = (state, action) => {
   switch (action.type) {
+    case SAVE_DRAFT: {
+      const draftId = uuidv4()
+      const currentDraft =
+        state.drafts.find(
+          (d) => d.from === state.me && d.to === state.selected
+        ) || {}
+
+      const newDraft = [
+        ...state.drafts.filter((d) => d.id !== currentDraft.id),
+        {
+          id: currentDraft.id || draftId,
+          from: state.me,
+          to: state.selected,
+          message: action.payload,
+          timestamp: Date.now(),
+        },
+      ]
+
+      return { ...state, drafts: newDraft }
+    }
+
     case SEND_MESSAGE: {
       if (!action.payload) return state
 
@@ -92,6 +128,7 @@ const reducerFn = (state, action) => {
         selected: newId,
       }
     }
+
     case SELECT_CONTACT: {
       return {
         ...state,
